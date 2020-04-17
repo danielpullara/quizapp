@@ -12,7 +12,6 @@
     }
 
     .lifeline-container {
-        color:$green;
         display:flex;
         justify-content: space-between;
     }
@@ -20,6 +19,16 @@
     .lifeline {
         position: relative;
         top:-3px;
+    }
+    
+    .lifeline-icon{
+        color:$green;
+        cursor:pointer
+    }
+    .lifeline-icon:hover{
+        background: none;
+        color:darken($orange, $amount: 10%);
+        
     }
 
     h5 {

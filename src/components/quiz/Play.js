@@ -25,6 +25,7 @@ class Play extends React.Component {
             hints: 5,
             fiftyFifty: 2,
             usedFiftyFifty: false,
+            previousRandomNumbers:[],
             time: {}
         };
     }
@@ -43,18 +44,17 @@ class Play extends React.Component {
             currentQuestion = questions[currentQuestionIndex];
             nextQuestion = questions[currentQuestionIndex + 1];
             previousQuestion = questions[currentQuestionIndex === 0 ? currentQuestionIndex : currentQuestionIndex - 1];
-            console.log("currentQuestion", currentQuestion)
-            console.log(nextQuestion)
-            console.log(previousQuestion)
             const answer = currentQuestion.answer;
             this.setState({
                 currentQuestion,
                 nextQuestion,
                 previousQuestion,
-                numberofQuestions:questions.length,
+                numberofQuestions: questions.length,
                 answer,
+            }, () => {
+                this.showOptions();
+                
             });
-
         }
     };
 
@@ -71,8 +71,52 @@ class Play extends React.Component {
             this.wrongAnswer();
         }
     }
-    handleButtonClick = () => {
+    handleNextButtonClick = () => {
         this.playButtonSound();
+        if (this.state.nextQuestion !== undefined) {
+            this.setState(prevState => ({
+                currentQuestionIndex: prevState.currentQuestionIndex + 1
+            }), () => {
+                this.displayQuestions(this.state.state, this.state.currentQuestion, this.state.nextionQuestion, this.state.previousQuestion)
+            });
+        }
+    };
+    handlePreviousButtonClick = () => {
+        this.playButtonSound();
+        if (this.state.previousQuestion !== undefined) {
+            this.setState(prevState => ({
+                currentQuestionIndex: prevState.currentQuestionIndex - 1
+            }), () => {
+                this.displayQuestions(this.state.state, this.state.currentQuestion, this.state.nextionQuestion, this.state.previousQuestion)
+            });
+        }
+    };
+
+    handleQuitButtonClick = () => {
+        this.playButtonSound();
+        if (window.confirm('Are you sure you want to quit?')) {
+            this.props.history.push('/')
+        }
+    }
+
+
+    handleButtonClick = (e) => {
+        switch (e.target.id) {
+            case 'next-button':
+                this.handleNextButtonClick();
+                break;
+            case 'previous-button':
+                this.handlePreviousButtonClick();
+                break;
+            case 'quit-button':
+                this.handleQuitButtonClick();
+                break;
+            default:
+                break;
+
+        }
+
+
     };
     playButtonSound = () => {
         document.getElementById('select-sound').play();
@@ -113,10 +157,44 @@ class Play extends React.Component {
                 this.displayQuestions(this.state.questions, this.state.currentQuestion, this.state.nextQuestion, this.state.previousQuestion)
             });
     }
+    showOptions = () => {
+        const options = Array.from(document.querySelectorAll('.option'));
+        
+        options.forEach(option => {
+            option.style.visibility = 'visible';
+        });
+    }
+    
+    handleHints = () => {
+        const options = Array.from(document.querySelectorAll('.option'));
+        let indexOfAnswer;
+
+        options.forEach((option, index) => {
+            if (option.innerHTML.toLowerCase() === this.state.answer.toLowerCase()) {
+                indexOfAnswer = index;
+            }
+        })
+        while (true) {
+            const randomNumber = Math.round(Math.random() * 3);
+            if (randomNumber !== indexOfAnswer && !this.state.previousRandomNumbers.includes(randomNumber)) {
+                options.forEach((option, index) => {
+                    if (index === randomNumber) {
+                        option.style.visibility = 'hidden';
+                        this.setState((prevState) => ({
+                            hints: prevState.hints - 1,
+                            previousRandomNumbers: prevState.previousRandomNumbers.concat(randomNumber)
+                        }));
+                    }
+                });
+                break;
+            }
+            if(this.state.previousRandomNumbers.length >= 3) break;
+        }
+    }
 
     render() {
 
-        const { currentQuestion, currentQuestionIndex, numberofQuestions } = this.state;
+        const { currentQuestion, currentQuestionIndex, hints, numberofQuestions } = this.state;
         return (
             <Fragment>
                 <Helmet><title>Quiz Page</title></Helmet>
@@ -129,10 +207,12 @@ class Play extends React.Component {
                     <h2>QUIZ MODE</h2>
                     <div className="lifeline-container">
                         <p>
-                            <span className="mdi mdi-set-center mdi-24px lifeline-icon" ></span><span className="lifeline">2</span>
+                            <span className="mdi mdi-set-center mdi-24px lifeline-icon" >
+                            </span><span className="lifeline"></span>
                         </p>
                         <p>
-                            <span className="mdi mdi-lightbulb-on-outline mdi-24px lifeline-icon" ></span><span className="lifeline">5</span>
+                            <span onClick={this.handleHints} className="mdi mdi-lightbulb-on-outline mdi-24px lifeline-icon" ></span>
+                            <span className="lifeline">{hints}</span>
                         </p>
                     </div>
                     <div className="timer-container">
@@ -152,9 +232,9 @@ class Play extends React.Component {
                         <p onClick={this.handleOptionClick} className="option">{currentQuestion.optionD}</p>
                     </div>
                     <div className="button-container">
-                        <button onClick={this.handleButtonClick}>Previous</button>
-                        <button onClick={this.handleButtonClick}>Next</button>
-                        <button onClick={this.handleButtonClick}>Quit</button>
+                        <button id="previous-button" onClick={this.handleButtonClick}>Previous</button>
+                        <button id="next-button" onClick={this.handleButtonClick}>Next</button>
+                        <button id="quit-button" onClick={this.handleButtonClick}>Quit</button>
                     </div>
                 </div>
             </Fragment>
