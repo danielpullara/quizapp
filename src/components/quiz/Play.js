@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import classnames from 'classnames'
 import { Helmet } from 'react-helmet';
 import M from 'materialize-css';
 import questions from '../../questions.json';
@@ -25,10 +26,15 @@ class Play extends React.Component {
             hints: 5,
             fiftyFifty: 2,
             usedFiftyFifty: false,
+            nextButtonDisabled: false,
+            previousButtonDisabled: true,
             previousRandomNumbers: [],
             time: {}
         };
         this.interval = null;
+        this.correctSound = React.createRef()
+        this.wrongSound = React.createRef()
+        this.buttonSound = React.createRef()
     }
 
     // there are supposed to be questions that are taken from .json file 
@@ -56,6 +62,7 @@ class Play extends React.Component {
                 previousRandomNumbers: []
             }, () => {
                 this.showOptions();
+                this.handleDisableButton();
 
             });
         }
@@ -64,12 +71,12 @@ class Play extends React.Component {
     handleOptionClick = (e) => {
         if (e.target.innerHTML.toLowerCase() === this.state.answer.toLowerCase()) {
             setTimeout(() => {
-                document.getElementById('correct-sound').play();
+                this.correctSound.current.play();
             }, 200)
             this.correctAnswer();
         } else {
             setTimeout(() => {
-                document.getElementById('wrong-sound').play();
+                this.wrongSound.current.play();
             }, 200)
             this.wrongAnswer();
         }
@@ -122,7 +129,7 @@ class Play extends React.Component {
 
     };
     playButtonSound = () => {
-        document.getElementById('select-sound').play();
+        this.buttonSound.current.play();
     };
 
 
@@ -140,7 +147,12 @@ class Play extends React.Component {
             numberOfAnsweredQuestions: prevState.numberOfAnsweredQuestions + 1
         }),
             () => {
-                this.displayQuestions(this.state.questions, this.state.currentQuestion, this.state.nextQuestion, this.state.previousQuestion)
+                if (this.state.nextQuestion === undefined) {
+                    this.endGame();
+    
+                } else {
+                    this.displayQuestions(this.state.questions, this.state.currentQuestion, this.state.nextQuestion, this.state.previousQuestion)
+                }
             });
     }
 
@@ -155,10 +167,14 @@ class Play extends React.Component {
             wrongAnswer: prevState.wrongAnswers + 1,
             currentQuestionIndex: prevState.currentQuestionIndex + 1,
             numberOfAnsweredQuestions: prevState.numberOfAnsweredQuestions + 1,
-        }),
-            () => {
+        }), () => {
+            if (this.state.nextQuestion === undefined) {
+                this.endGame();
+
+            } else {
                 this.displayQuestions(this.state.questions, this.state.currentQuestion, this.state.nextQuestion, this.state.previousQuestion)
-            });
+            }
+        });
     }
     showOptions = () => {
         const options = Array.from(document.querySelectorAll('.option'));
@@ -259,8 +275,7 @@ class Play extends React.Component {
                         seconds: 0
                     }
                 }, () => {
-                    alert('Quiz has ended')
-                    this.props.history.push('/');
+                    this.endGame();
                 });
             } else {
                 this.setState({
@@ -272,22 +287,62 @@ class Play extends React.Component {
             }
         }, 1000);
     }
+
+    handleDisableButton = () => {
+        if (this.state.previousQuestion === undefined || this.state.currentQuestionIndex === 0) {
+            this.setState({
+                previousButtonDisabled: true
+            });
+        } else {
+            this.setState({
+                previousButtonDisabled: false
+            });
+        }
+        if (this.state.nextQuestion === undefined || this.state.currentQuestionIndex + 1 === this.state.numberOfQuestions) {
+            this.setState({
+                nextButtonDisabled: true
+            });
+        } else {
+            this.setState({
+                nextButtonDisabled: false
+            });
+        }
+    }
+    endGame = () => {
+        alert('Quiz has ended');
+        const { state } = this;
+        const playerStats = {
+            score: state.score,
+            numberOfQuestion: state.numberofQuestions,
+            numberOfAnsweredQuestions: state.correctAnswers,
+            wrongAnswers: state.wrongAnswer,
+            fiftyFiftyUsed: 2 - state.fiftyFifty,
+            hintsUsed: 5 - state.hints
+        };
+        console.log(playerStats)
+        setTimeout(() => {
+            this.props.history.push('/play/quizSummary',playerStats )
+        }, 1000)
+
+    }
+
+
     render() {
 
-        const { currentQuestion, 
-            currentQuestionIndex, 
-            fiftyFifty, 
-            hints, 
+        const { currentQuestion,
+            currentQuestionIndex,
+            fiftyFifty,
+            hints,
             numberofQuestions,
-            time 
+            time
         } = this.state;
         return (
             <Fragment>
                 <Helmet><title>Quiz Page</title></Helmet>
                 <Fragment>
-                    <audio id="correct-sound" src={correctNotification}></audio>
-                    <audio id="wrong-sound" src={wrongNotification}></audio>
-                    <audio id="select-sound" src={selectNotification}></audio>
+                    <audio ref={this.correctSound} src={correctNotification}></audio>
+                    <audio ref={this.wrongSound} src={wrongNotification}></audio>
+                    <audio ref={this.buttonSound} src={selectNotification}></audio>
                 </Fragment>
                 <div className="questions">
                     <h2>QUIZ MODE</h2>
@@ -320,8 +375,17 @@ class Play extends React.Component {
                         <p onClick={this.handleOptionClick} className="option">{currentQuestion.optionD}</p>
                     </div>
                     <div className="button-container">
-                        <button id="previous-button" onClick={this.handleButtonClick}>Previous</button>
-                        <button id="next-button" onClick={this.handleButtonClick}>Next</button>
+                        <button
+                            className={classnames('', { 'disable': this.state.previousButtonDisabled })}
+                            id="previous-button"
+                            onClick={this.handleButtonClick}>
+                            Previous
+                            </button>
+                        <button
+                            className={classnames('', { 'disable': this.state.nextButtonDisabled })}
+                            id="next-button"
+                            onClick={this.handleButtonClick}>
+                            Next</button>
                         <button id="quit-button" onClick={this.handleButtonClick}>Quit</button>
                     </div>
                 </div>
