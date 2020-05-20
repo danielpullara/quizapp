@@ -17,7 +17,7 @@ class Play extends React.Component {
             nextQuestion: {},
             previousQuestion: {},
             answer: ' ',
-            numberofQuestions: 0,
+            numberOfQuestions: 0,
             numberOfAnsweredQuestions: 0,
             currentQuestionIndex: 0,
             score: 0,
@@ -57,7 +57,7 @@ class Play extends React.Component {
                 currentQuestion,
                 nextQuestion,
                 previousQuestion,
-                numberofQuestions: questions.length,
+                numberOfQuestions: questions.length,
                 answer,
                 previousRandomNumbers: []
             }, () => {
@@ -164,7 +164,7 @@ class Play extends React.Component {
             displayLength: 1500
         });
         this.setState(prevState => ({
-            wrongAnswer: prevState.wrongAnswers + 1,
+            wrongAnswers: prevState.wrongAnswers + 1,
             currentQuestionIndex: prevState.currentQuestionIndex + 1,
             numberOfAnsweredQuestions: prevState.numberOfAnsweredQuestions + 1,
         }), () => {
@@ -311,17 +311,20 @@ class Play extends React.Component {
     endGame = () => {
         alert('Quiz has ended');
         const { state } = this;
+        console.log(state)
         const playerStats = {
             score: state.score,
-            numberOfQuestion: state.numberofQuestions,
-            numberOfAnsweredQuestions: state.correctAnswers,
-            wrongAnswers: state.wrongAnswer,
+            numberOfQuestions: state.numberOfQuestions,
+            numberOfAnsweredQuestions: state.numberOfAnsweredQuestions,
+            correctAnswers: state.correctAnswers,
+            wrongAnswers: state.wrongAnswers,
             fiftyFiftyUsed: 2 - state.fiftyFifty,
             hintsUsed: 5 - state.hints
         };
         console.log(playerStats)
         setTimeout(() => {
-            this.props.history.push('/play/quizSummary',playerStats )
+            console.log(playerStats)
+            this.props.history.push('/play/quizSummary', playerStats )
         }, 1000)
 
     }
@@ -333,7 +336,7 @@ class Play extends React.Component {
             currentQuestionIndex,
             fiftyFifty,
             hints,
-            numberofQuestions,
+            numberOfQuestions,
             time
         } = this.state;
         return (
@@ -360,7 +363,7 @@ class Play extends React.Component {
                     </div>
                     <div className="timer-container">
                         <p>
-                            <span className="left" style={{ float: 'left' }}>{currentQuestionIndex + 1} of {numberofQuestions} </span>
+                            <span className="left" style={{ float: 'left' }}>{currentQuestionIndex + 1} of {numberOfQuestions} </span>
                             <span className="right">{time.minutes}:{time.seconds}<span className="mdi mdi-clock-outline mdi-24px"></span></span>
                         </p>
                     </div>
