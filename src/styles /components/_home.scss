@@ -58,10 +58,10 @@ a.play-button:hover{
         margin-top: $lg;
     }
 #login-button{
-    background-color:$red;
+    background-color:$blue;
 }
 #login-button:hover{
-    background-color:darken($red, $amount: 10%) ;
+    background-color:darken($blue, $amount: 10%) ;
     box-shadow:$shadow;
 }
 #signup-button{

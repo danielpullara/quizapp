@@ -1,28 +1,18 @@
 import React, { Component } from 'react'
-import jwt_decode from 'jwt-decode'
+import {withRouter} from "react-router-dom"
+import QuizInstructions from './quiz/QuizInstructions'
+
 
 class Profile extends Component {
-    constructor() {
-        super()
-        this.state = {
-            first_name: '',
-            last_name: '',
-            email: ''
-        }
-    }
 
 
     componentDidMount() {
-        const token = localStorage.usertoken
-        const decoded = jwt_decode(token)
-        this.setState({
-            first_name: decoded.first_name,
-            last_name: decoded.last_name,
-            email: decoded.email
-        })
+        if(!this.props.user) return this.props.history.push("/")
     }
 
+
     render() {
+        console.log(this.props.user)
         return (
             <div className="container">
                 <div className="jumbotron mt-5">
@@ -32,21 +22,23 @@ class Profile extends Component {
                     <tbody>
                         <tr>
                             <td>First Name</td>
-                            <td>{this.state.first_name}</td>
+                            <td>{this.props.user.first_name}</td>
                         </tr>
                         <tr>
                             <td>Last Name</td>
-                            <td>{this.state.last_name}</td>
+                            <td>{this.props.user.last_name}</td>
                         </tr>
                         <tr>
                             <td>Email</td>
-                            <td>{this.state.email}</td>
+                            <td>{this.props.user.email}</td>
                         </tr>
                     </tbody>
                 </table>
+
+                <QuizInstructions/>
             </div>
         )
     }
 }
 
-export default Profile
+export default withRouter(Profile)

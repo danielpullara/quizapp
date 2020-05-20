@@ -16,7 +16,7 @@ class Play extends React.Component {
             currentQuestion: {},
             nextQuestion: {},
             previousQuestion: {},
-            answer: ' ',
+            answer:' ',
             numberOfQuestions: 0,
             numberOfAnsweredQuestions: 0,
             currentQuestionIndex: 0,
@@ -323,7 +323,7 @@ class Play extends React.Component {
         };
         console.log(playerStats)
         setTimeout(() => {
-            console.log(playerStats)
+            console.log(this.props)
             this.props.history.push('/play/quizSummary', playerStats )
         }, 1000)
 

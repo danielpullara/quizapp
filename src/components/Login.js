@@ -1,16 +1,20 @@
 
 import React, { Component } from 'react'
 import { login } from './UserFunctions'
+import { withRouter } from 'react-router-dom'
+
 
 class Login extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             email: '',
             password: '',
         }
+
+        
         this.onChange = this.onChange.bind(this)
-        // this.onSubmit = this.onChange.bind(this)
+        // this.haha = this.onSubmit.bind(this)
     }
     onChange(e) {
         this.setState({[e.target.name]: e.target.value })
@@ -18,26 +22,29 @@ class Login extends Component {
 
     haha = (e) => {
         e.preventDefault()
-
+        console.log("this.state ", this.state)
         const user = {
             email: this.state.email,
             password: this.state.password
         }
-        console.log("dsadsadsa")
         login(user).then(res => {
             if (res) {
-                this.props.history.push('/profile')
+                this.props.checkUser()
+                setTimeout(()=>{
+                    this.props.history.push('/profile')
+                }, 500)
             }
         })
     }
-
+    
     render() {
+        console.log(this.props)
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-md-6 mt-5 mx-auto">
+                    <div className="col-md-12 mt-5 mx-auto">
                         <form noValidate onSubmit={(e)=>this.haha(e)} >
-                            <h1 className="h3 mb-3 font-weight-normal">Please Sign In</h1>
+                            <h1 className="h3 mb-3 font-weight-normal">Sign In</h1>
                             <div className="form-group">
                                 <label htmlFor="email">Email Address</label>
                                 <input
@@ -60,8 +67,11 @@ class Login extends Component {
                                     onChange={this.onChange}
                                 />
                             </div>
-                            <button type="submit" className="btn btn-lg btn-primary btn-block">
-                                Sign in
+                            <button 
+                            type="submit" 
+                            className="btn btn-lg btn-block"
+                            id="login-button">
+                                Login
                             </button>
                         </form>
                     </div>
@@ -73,6 +83,6 @@ class Login extends Component {
 
 }
 
-export default Login;
+export default withRouter(Login);
 
 

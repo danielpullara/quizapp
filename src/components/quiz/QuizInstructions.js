@@ -45,8 +45,8 @@ const QuizInstructions = () => (
             </ul>
 
         <div>
-            <span className="left"><Link to="/">No Take me Back</Link></span>
-            <span className="right"><Link to="/play/Quiz">Okay lets Do This! </Link></span>
+            <button ><Link className="left"  to="/">No Take me Back</Link></button>
+            <button><Link  className="right" to="/play/Quiz">Okay lets Do This! </Link></button>
         </div>
         </div>
     </Fragment>

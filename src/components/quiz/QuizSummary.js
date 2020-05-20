@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+
 
 class QuizSummary extends Component {
     constructor(props) {
@@ -32,7 +33,6 @@ class QuizSummary extends Component {
     }
 
     render() {
-        console.log(this.props.location.state)
         const { state } = this.props.location;
         let stats, remark;
         
@@ -122,4 +122,4 @@ class QuizSummary extends Component {
 }
 
 
-export default QuizSummary
+export default withRouter(QuizSummary)

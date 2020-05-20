@@ -1,14 +1,16 @@
 .instructions {
-    border: 1px solid darken($off-white, 10%);
+    border: 3px solid darken($blue, 1%);
     border-radius: 5px;
-    margin-top: $lg;
-    margin-bottom: $lg;
-    padding: $sm $lg;
+    margin-top: $sm;
+    margin-bottom: $sm;
+    padding: $md $md;
+    
 
 
 h1 {
-    color:$off-black;
-    font-size:$md;
+    
+    color: $blue ;
+    font-size:$lg;
     text-align: center;
 }
 
@@ -18,7 +20,7 @@ h1 {
 }
 
 .lifeline-icon {
-    color: $green;
+    color: $blue;
     cursor:point;
 }
 
@@ -26,7 +28,18 @@ h1 {
     padding-left: 30px;
     margin-top: 10px;
     margin-bottom: 15px;
+    
 }
+
+.left {
+    color:$red;
+    
+}
+
+.right {
+    color:$blue;
+}
+
 
 img {
     width:80%;

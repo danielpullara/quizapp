@@ -1,43 +1,47 @@
 import React, { Component } from 'react'
 import { register } from './UserFunctions'
- 
+import { withRouter } from 'react-router-dom' 
+
+
 class Register extends Component {
+    
     constructor() {
         super()
-        this.state = {
-            first_name: '',
-            last_name:'',
-            email: '',
-            password: '',
+        this.state= {
+            email:'',
+            password:'',
+            first_name:'',
+            last_name:''
         }
+        console.log("password" , typeof this.state.password)
         this.onChange = this.onChange.bind(this)
-        this.onSubmit = this.onChange.bind(this)
+        // this.onSubmit = this.onSubmit.bind(this)
     }
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    onSubmit(e) {
+    haha(e) {
+        console.log("this.state.password", this.state.password)
         e.preventDefault()
-
         const user = {
-            first_name: this.state.first_name,
-            last_name: this.state.last_name,
             email: this.state.email,
-            password: this.state.password
+            password: this.state.password,
+            first_name: this.state.first_name,
+            last_name: this.state.last_name
         }
 
-        register(user).this(res => {
+        register(user).then(res => {
                 this.props.history.push('/login')
         })
     }
     render() {
         return (
-            <div className="container">
+            <div className="container" >
                 <div className="row">
-                    <div className="col-md-6 mt-5 mx-auto">
-                        <form noValidate onSubmit={this.onSubmit} >
-                            <h1 className="h3 mb-3 font-weight-normal">Please Sign In</h1>
+                    <div className="col-md-12 mt-5 mx-auto">
+                        <form noValidate onSubmit={(e)=>this.haha(e)} >
+                            <h1 className="h3 mb-3 font-weight-normal">Register Your Account</h1>
                             <div className="form-group">
                                 <label htmlFor="first_name">First Name</label>
                                 <input
@@ -82,7 +86,10 @@ class Register extends Component {
                                     onChange={this.onChange}
                                 />
                             </div>
-                            <button type="submit" className="btn btn-lg btn-primary btn-block">
+                            <button 
+                            type="submit" 
+                            className="btn btn-lg btn-primary btn-block"
+                            id="signup-button">
                                 Register
                             </button>
                         </form>
@@ -95,4 +102,4 @@ class Register extends Component {
 
 }
 
-export default Register
+export default withRouter(Register)
