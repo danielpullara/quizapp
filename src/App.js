@@ -4,7 +4,6 @@ import Home from '../src/components/Home';
 import QuizInstructions from './components/quiz/QuizInstructions'
 import Play from './components/quiz/Play'
 import QuizSummary from './components/quiz/QuizSummary'
-import Landing from './components/Landing'
 import Register from './components/Register'
 import Profile from './components/Profile'
 import Login from './components/Login'

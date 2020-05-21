@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Helmet } from "react-helmet";
 import { Link, withRouter } from 'react-router-dom'
+import AdSense from 'react-adsense';
 
 
 class QuizSummary extends Component {
@@ -35,18 +36,18 @@ class QuizSummary extends Component {
     render() {
         const { state } = this.props.location;
         let stats, remark;
-        
+
         if (this.state.score <= 30) {
-            
+
             remark = 'You need more practice';
-        } else if (this.state.score> 30 && this.state.score <= 50) {
+        } else if (this.state.score > 30 && this.state.score <= 50) {
             remark = 'Better luck next time';
-        } else if (this.state.score<= 70 && this.state.score > 50) {
+        } else if (this.state.score <= 70 && this.state.score > 50) {
             remark = 'You can do better';
-        } else if (this.state.score>= 71 && this.state.score <= 84) {
-            remark = 'You did great!' 
+        } else if (this.state.score >= 71 && this.state.score <= 84) {
+            remark = 'You did great!'
         } else {
-            console.log("score======",this.state.score);
+            console.log("score======", this.state.score);
             remark = 'You\'re an absolute genius'
         }
 
@@ -56,9 +57,9 @@ class QuizSummary extends Component {
         if (state !== undefined) {
             stats = (<Fragment>
                 <div>
-                    <span 
-                    style={{display: 'flex', justifyContent: 'center'}} 
-                    className="mdi mdi-check-circle-outline success-icon">
+                    <span
+                        style={{ display: 'flex', justifyContent: 'center' }}
+                        className="mdi mdi-check-circle-outline success-icon">
                     </span>
                 </div>
                 <h1>Quiz has Ended</h1>
@@ -83,7 +84,7 @@ class QuizSummary extends Component {
                     <span className="stat left">50/50 Used</span>
                     <span className="right">{this.state.fiftyFiftyUsed}</span><br />
                 </div>
-                <section>
+                <section style={{"width" : "100%", "backgroundColor" : "white"}}>
                     <ul>
                         <li>
                             <Link to="/play/quiz"> Play Again</Link>
@@ -93,6 +94,15 @@ class QuizSummary extends Component {
                         </li>
                     </ul>
                 </section>
+                <AdSense.Google
+                    style={{"width" : "100%", display: 'block'}}
+                    client='ca-pub-9583663176602133'
+                    slot='4428685352'
+                    format='auto'
+                    responsive='true'
+                    layoutKey='-gw-1+2a-9x+5c'
+                />
+                
             </Fragment>
             )
         } else {
@@ -114,7 +124,7 @@ class QuizSummary extends Component {
             <Fragment>
                 <Helmet><title>Quiz App- Summary</title></Helmet>
                 <div className="quiz-summary">
-                {stats}
+                    {stats}
                 </div>
             </Fragment>
         )

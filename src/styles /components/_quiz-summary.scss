@@ -3,13 +3,13 @@
     font-family:$quicksand;
 
     span.success-icon {
-        color: $green;
+        color: $blue;
         font-size: $xxlg;
         justify-content: center;
     }
 
     h1{
-        color:$green;
+        color:$blue;
         text-align: center;
         font-size: $lg;
         margin-top: -$sm;
@@ -59,17 +59,16 @@
     }
 
     section ul li:last-child { 
-        border: 1px solid $green;
+        border: 1px solid $blue;
         transition: 0.3s linear all;
     }
     section ul li:last-child {
-        color: $green;
+        color: $blue;
     }
     section ul li:last-child:hover { 
-        background-color: $green;
+        background-color: $blue;
     }
    
-
     .no-stats {
         color:$off-black;
         margin:$xxlg auto;
@@ -87,6 +86,7 @@
         margin: 0;
         padding: $sm;
         max-width: 100%;
+        
 
     }
 }

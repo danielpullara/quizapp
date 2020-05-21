@@ -1,5 +1,5 @@
 #home {
-    background-image: url(../../assets/img/background.jpg);
+    background-clip: url(../../assets/img/background.jpg);
     background-size: cover;
     background-position: center;
     display: flex;
@@ -19,7 +19,7 @@
 
     .cube{
         font-size: 8rem;
-        color: $orange;
+        color: $blue;
         text-align: center;
     }
 
@@ -36,7 +36,7 @@
     }
 
     a.play-button{
-        background-color: $green;
+        background-color: $blue;
         border-radius: $button-radius;
         color: #ffffff;
         display: block;
@@ -47,7 +47,7 @@
     }
 
 a.play-button:hover{
-    background-color:darken($green, $amount: 10%) ;
+    background-color:darken($blue, $amount: 10%) ;
     box-shadow:$shadow;
 }
 

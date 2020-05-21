@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {withRouter} from "react-router-dom"
 import QuizInstructions from './quiz/QuizInstructions'
-
+import Chart from './Chart'
 
 class Profile extends Component {
 
@@ -15,6 +15,7 @@ class Profile extends Component {
         console.log(this.props.user)
         return (
             <div className="container">
+                <Chart/>
                 <div className="jumbotron mt-5">
                     <h1 className="text-center">Profile</h1>
                 </div>
@@ -34,7 +35,6 @@ class Profile extends Component {
                         </tr>
                     </tbody>
                 </table>
-
                 <QuizInstructions/>
             </div>
         )
