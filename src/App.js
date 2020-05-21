@@ -65,11 +65,9 @@ function App() {
       <Route path="/play/QuizSummary" exact component={QuizSummary}/>
       <Route path="/play/Quiz" exact render={()=> <Play user={user}/>}/>
       <Route path="/play/instructions" exact render={()=>  <QuizInstructions checkUser={checkUser}/>}/>
-      {/* <Route path="/play/instructions" exact component={QuizInstructions}/> */}
       <Route path="/" exact  render={()=> <Home user={user}  checkUser={checkUser} />}/>
       <Route path="/register" exact component={Register}/>
       <Route path="/profile" exact component={()=> <Profile user={user}/>}/>
-      <Route path="/landing" exact component={Landing}/>
       <Route path="/login" exact render={()=>  <Login checkUser={checkUser} />}/>
     </Router>
   );

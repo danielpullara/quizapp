@@ -7,6 +7,7 @@ import isEmpty from '../../utils/is-empty';
 import correctNotification from '../../assets/img/audio/right.mp3';
 import wrongNotification from '../../assets/img/audio/wrong.mp3';
 import selectNotification from '../../assets/img/audio/select.mp3';
+import { withRouter } from 'react-router-dom'
 
 class Play extends React.Component {
     constructor(props) {
@@ -397,4 +398,4 @@ class Play extends React.Component {
     }
 }
 
-export default Play;
+export default withRouter(Play);
