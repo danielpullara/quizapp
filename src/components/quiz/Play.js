@@ -2,18 +2,18 @@ import React, { Fragment } from 'react';
 import classnames from 'classnames'
 import { Helmet } from 'react-helmet';
 import M from 'materialize-css';
-import questions from '../../questions.json';
 import isEmpty from '../../utils/is-empty';
 import correctNotification from '../../assets/img/audio/right.mp3';
 import wrongNotification from '../../assets/img/audio/wrong.mp3';
 import selectNotification from '../../assets/img/audio/select.mp3';
 import { withRouter } from 'react-router-dom'
+import Axios from 'axios';
 
 class Play extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            questions,
+            questions:[],
             currentQuestion: {},
             nextQuestion: {},
             previousQuestion: {},
@@ -41,11 +41,27 @@ class Play extends React.Component {
     // there are supposed to be questions that are taken from .json file 
 
     componentDidMount() {
+        
+        this.getQuestions()
+    }
+        startGame(){
         const { questions, currentQuestion, nextQuestion, previousQuestion } = this.state;
         this.displayQuestions(questions, currentQuestion, nextQuestion, previousQuestion);
         this.startTimer();
-    }
+        }
+      getQuestions = async () => {
+        try{
 
+            const res = await Axios.get("http://localhost:5000/QuestionsRoute/me", {
+                headers: {'Authorization': `Bearer ${localStorage.getItem("usertoken")}`}
+            })
+            // if(res.status)
+            this.setState({questions:res.data}, ()=> this.startGame())
+        }
+        catch(e){
+            console.log("error while geting questions",e)
+        }
+    }
     displayQuestions = (questions = this.state.questions) => {
         let { currentQuestionIndex } = this.state;
         let currentQuestion, nextQuestion, previousQuestion

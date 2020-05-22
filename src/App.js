@@ -7,7 +7,7 @@ import QuizSummary from './components/quiz/QuizSummary'
 import Register from './components/Register'
 import Profile from './components/Profile'
 import Login from './components/Login'
-
+import Protected from "./components/Protected"
 function App() {
   const [user,setUser] = useState(null)
   const [loaded, setLoaded] = useState(false)
@@ -61,12 +61,12 @@ function App() {
   if (!loaded) return <h1> loading </h1>
   return ( 
     <Router>
-      <Route path="/play/QuizSummary" exact component={QuizSummary}/>
-      <Route path="/play/Quiz" exact render={()=> <Play user={user}/>}/>
+      <Protected path="/play/QuizSummary" exact user={user} component={QuizSummary}/>
+      <Protected path="/play/Quiz" exact user={user} component={Play} />
       <Route path="/play/instructions" exact render={()=>  <QuizInstructions checkUser={checkUser}/>}/>
       <Route path="/" exact  render={()=> <Home user={user}  checkUser={checkUser} />}/>
       <Route path="/register" exact component={Register}/>
-      <Route path="/profile" exact component={()=> <Profile user={user}/>}/>
+      <Protected path="/profile" exact user={user} component={Profile} />
       <Route path="/login" exact render={()=>  <Login checkUser={checkUser} />}/>
     </Router>
   );

@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import { register } from './UserFunctions'
-import { withRouter } from 'react-router-dom' 
+import { withRouter } from 'react-router-dom'
 
 
 class Register extends Component {
-    
+
     constructor() {
         super()
-        this.state= {
-            email:'',
-            password:'',
-            first_name:'',
-            last_name:''
+        this.state = {
+            email: '',
+            password: '',
+            first_name: '',
+            last_name: ''
         }
-        console.log("password" , typeof this.state.password)
+        console.log("password", typeof this.state.password)
         this.onChange = this.onChange.bind(this)
         // this.onSubmit = this.onSubmit.bind(this)
     }
@@ -30,9 +30,8 @@ class Register extends Component {
             first_name: this.state.first_name,
             last_name: this.state.last_name
         }
-
         register(user).then(res => {
-                this.props.history.push('/login')
+            this.props.history.push('/login')
         })
     }
     render() {
@@ -40,7 +39,7 @@ class Register extends Component {
             <div className="container" >
                 <div className="row">
                     <div className="col-md-12 mt-5 mx-auto">
-                        <form noValidate onSubmit={(e)=>this.haha(e)} >
+                        <form noValidate onSubmit={(e) => this.haha(e)} >
                             <h1 className="h3 mb-3 font-weight-normal">Register Your Account</h1>
                             <div className="form-group">
                                 <label htmlFor="first_name">First Name</label>
@@ -86,10 +85,10 @@ class Register extends Component {
                                     onChange={this.onChange}
                                 />
                             </div>
-                            <button 
-                            type="submit" 
-                            className="btn btn-lg btn-primary btn-block"
-                            id="signup-button">
+                            <button
+                                type="submit"
+                                className="btn btn-lg btn-primary btn-block"
+                                id="signup-button">
                                 Register
                             </button>
                         </form>

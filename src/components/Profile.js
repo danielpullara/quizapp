@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import {withRouter} from "react-router-dom"
 import QuizInstructions from './quiz/QuizInstructions'
+import InputQuestions from './InputQuestions'
 import Chart from './Chart'
+import Questions from "../components/Questions"
 
 class Profile extends Component {
 
@@ -12,7 +14,7 @@ class Profile extends Component {
 
 
     render() {
-        console.log(this.props.user)
+        console.log("this.props", this.props)
         return (
             <div className="container">
                 <Chart/>
@@ -35,7 +37,10 @@ class Profile extends Component {
                         </tr>
                     </tbody>
                 </table>
+              
                 <QuizInstructions/>
+                <InputQuestions />
+                <Questions />
             </div>
         )
     }
