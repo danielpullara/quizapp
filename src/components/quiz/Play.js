@@ -358,14 +358,14 @@ class Play extends React.Component {
         } = this.state;
         return (
             <Fragment>
-                <Helmet><title>Quiz Page</title></Helmet>
+                <Helmet><title>PART 107 - Commercial UAS Study Guide</title></Helmet>
                 <Fragment>
                     <audio ref={this.correctSound} src={correctNotification}></audio>
                     <audio ref={this.wrongSound} src={wrongNotification}></audio>
                     <audio ref={this.buttonSound} src={selectNotification}></audio>
                 </Fragment>
                 <div className="questions">
-                    <h2>QUIZ MODE</h2>
+                    <h2>Commercial UAS Study Guide</h2>
                     <div className="lifeline-container">
                         <p>
                             <span onClick={this.handleFiftyFifty} className="mdi mdi-set-center mdi-24px lifeline-icon" >

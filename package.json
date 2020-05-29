@@ -12,6 +12,7 @@
     "chart.js": "^2.9.3",
     "classnames": "^2.2.6",
     "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.15",
     "materialize-css": "^1.0.0",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",

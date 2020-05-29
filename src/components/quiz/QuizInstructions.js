@@ -9,25 +9,25 @@ import hints from '../../assets/img/hints.png'
 
 const QuizInstructions = () => (
     <Fragment>
-        <Helmet><title>Quiz Instruction -Quiz App</title></Helmet>
+        <Helmet><title>PART 107 - Commercial UAS Study Guide</title></Helmet>
         <div className="instructions container">
             <h1>How to Play the Game</h1>
-            <p>Ensure you read this guide from star to finish.</p>
+            <p>Read this guide from start to finish!</p>
             <ul className="browser-default" id="main-list">
-                <li>The Game has a duration of 15 minutes and ends as soon as your time elapses.</li>
-                <li>Each game consists of 15 questions.</li>
+                <li>The Quiz last for 60 minutes and ends when your time elapses.</li>
+                <li>Each game consists of 60 questions.</li>
                 <li>
-                    Every question constains 4 options.
+                    Every question constains 4 possible answers.
                     <img src={options} alt="Quiz App Options Example"></img>
                 </li>
-                <li>Select the option which best answers the question by clicking (or selecting) it
+                <li>Select the option that best answers the question by clicking
                     <img src={answer} alt="Quiz App Answer Example"></img>
                 </li>
                 <li>
-                    Each game has 2 lifelines namely:
+                    Although you don't have such a feature on the real test, Each game comes 2 lifelines namely:
                  <ul id="sublist">
-                        <li> 2 50-50 chances</li>
-                        <li>5 Hints </li>
+                        <li> (2) 50-50 chances</li>
+                        <li> 5 Hints </li>
                     </ul>
                 </li>
                 <li>
@@ -38,16 +38,16 @@ const QuizInstructions = () => (
                 </li>
                 <li>Using a hint by clicking the icon <span className="mdi mdi-lightbulb-on mdi-24px lifeline-icon"></span>
                     will remove one wrong answer leaving two wrong answers and one correct answer. You can use as many hints as possible on a single question.
-                    <img src={hints} alt="Quiz App Options Example"/> 
-                 </li>
-                 <li>Feel free to quit (or reture from) the game at any time. In that case your score will be revieled after words</li>
-                <li>The timer starts as soon as the game loads</li>
+                    <img src={hints} alt="Quiz App Options Example" />
+                </li>
+                <li>You may quit the game at any time.However You in order to recieve a score, you must finish the game.</li>
+                <li>The timer starts as soon as the game loads! Goodluck and Happy Studies!</li>
             </ul>
 
-        <div>
-            <Link className="left"  to="/">No Take me Back</Link>
-            <Link  className="right" to="/play/Quiz">Okay lets Do This! </Link>
-        </div>
+            <div>
+                <Link className="left" to="/">No Take me Back</Link>
+                <Link className="right" to="/play/Quiz">Okay lets Do This! </Link>
+            </div>
         </div>
     </Fragment>
 );

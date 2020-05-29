@@ -20,9 +20,7 @@ class InputQuestions extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-
-
-    haha(e) {
+    addQuestion(e) {
         e.preventDefault()
         const updatedQuestion = {
             question: this.state.question,
@@ -37,10 +35,27 @@ class InputQuestions extends Component {
             this.props.history.push('/profile')
         })
     }
+
+    // deletedQuestion(e) {
+    //     e.preventDefault()
+    //     const removedQuestion = {
+    //         question: this.state.question,
+    //         optionA: this.state.optionA,
+    //         optionB: this.state.optionB,
+    //         optionC: this.state.optionC,
+    //         optionD: this.state.optionD,
+    //         answer: this.state.answer
+    //     }
+
+    //     deleteQuestion(removedQuestion).then(res => {
+    //         this.props.history.push('/profile')
+    //     })
+    // }
+
     render() {
         return (
 
-            <Form noValidate onSubmit={(e) => this.haha(e)}>
+            <Form noValidate onSubmit={(e) => this.addQuestion(e)}>
 
                 <Form.Group controlId="exampleForm.ControlSelect2">
                 </Form.Group>
@@ -57,7 +72,6 @@ class InputQuestions extends Component {
                         value={this.state.question}
                         onChange={this.onChange} />
                 </Form.Group>
-
 
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Option A</Form.Label>
