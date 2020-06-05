@@ -15,20 +15,19 @@ class Profile extends Component {
     render() {
         return (
             <div className="container">
-                <div className="jumbotron mt-5">
-                    <h1 className="text-center">Profile</h1>
-                </div>
-                <Chart />
-                <h2 style={{ textAlign: "center" }}> Welcome Back! {this.props.user.first_name}</h2>
+                <h2 style={{ textAlign: "center" }}> Welcome {this.props.user.first_name}!</h2>
                 <table className="table col-md-6 mx-auto">
                     <tr >
                         <td style={{ textAlign: "center" }}> Email: {this.props.user.email}</td>
                     </tr>
                 </table>
-
+                <Chart />
                 <QuizInstructions/>
+                <h2 style={{ textAlign: "center" }} >Create New Questions Here!</h2>
                 <InputQuestions />
+                <h2 style={{ textAlign: "center" }} >Questions and Answers</h2>
                 <Questions />
+                
             </div>
         )
     }

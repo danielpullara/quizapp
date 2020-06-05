@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react"
 import Axios from "axios"
 import { deleteQuestion } from './InputQuestionsFunctions'
-import { useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom"
 
 export default function (props) {
     const [questions, setQuestions] = useState([])
@@ -37,12 +37,14 @@ export default function (props) {
         return questions.map(eachQuestion => {
             return (
                 <div>
-                    <button onClick={() => { deletedQuestion( eachQuestion._id); }}
-                        className="mdi mdi-delete mdi-24px lifeline-icon" />
-
-                    <p> {eachQuestion.question}</p>
-
-                    <p style={{ color: "blue" }}> {eachQuestion.answer}</p>
+                    <table className="table col-md-6 mx-auto">
+                    <button onClick={() => { deletedQuestion(eachQuestion._id); }}
+                                className="mdi mdi-delete mdi-24px lifeline-icon" />
+                        <tr>                           
+                            <td> {eachQuestion.question}</td>
+                            <td style={{ color: "blue" }}> {eachQuestion.answer}</td>
+                        </tr>
+                    </table>
 
                 </div >
             )

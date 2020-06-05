@@ -31,22 +31,24 @@ h1 {
 }
 
 .left {
-    border: 1px solid $blue;
-    transition: 0.3s linear all;
-    
-}
+        color: white;
+        background-color: darken($red,10%);
+        box-shadow: $shadow;
+        transition: 0.2s linear;
+    }
 .left:hover {
-    background-color:$blue;
-    color: white;
-}
+    background-color: darken($red,20%); 
+            } 
+
 
 .right {
-    border: 1px solid $blue;
-    transition: 0.3s linear all;
+    color: white;
+    background-color: darken($green,10%);
+    box-shadow: $shadow;
+    transition: 0.2s linear;
 }
 .right:hover {
-    background-color:$blue;
-    color: white;
+    background-color: darken($green,20%); 
 }
 
 
