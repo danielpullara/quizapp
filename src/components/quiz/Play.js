@@ -3,9 +3,9 @@ import classnames from 'classnames'
 import { Helmet } from 'react-helmet';
 import M from 'materialize-css';
 import isEmpty from '../../utils/is-empty';
-import correctNotification from '../../assets/img/audio/right.mp3';
-import wrongNotification from '../../assets/img/audio/wrong.mp3';
-import selectNotification from '../../assets/img/audio/select.mp3';
+import correctNotification from '../../assets/audio/right.mp3';
+import wrongNotification from '../../assets/audio/wrong.mp3';
+import selectNotification from '../../assets/audio/select.mp3';
 import { withRouter } from 'react-router-dom'
 import Axios from 'axios';
 
